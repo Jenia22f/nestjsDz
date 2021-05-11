@@ -1,9 +1,11 @@
 import {Injectable} from "@nestjs/common";
 import {CreateUserDto} from "../dto/create-user.dto";
+import {UserEntities} from "../user-entities";
+import {UpdateUsersDto} from "../dto/update-users.dto";
 
 @Injectable()
 export class UsersService {
-    private users = [
+    private users: UserEntities[] = [
         {
             id: '1',
             name: 'Name1',
@@ -21,22 +23,22 @@ export class UsersService {
         },
     ]
 
-    getAll() {
+    getAll(): UserEntities[] {
         return this.users
     }
 
-    getById(id) {
-        this.users.find(u => u.id === id)
+    getById(id): UserEntities {
+       return this.users.find(u => u.id === id)
     }
 
     create(createUserDto: CreateUserDto) {
-       return  this.users.push({
+       return this.users.push({
             ...createUserDto,
             id: Date.now().toString()
         })
     }
 
-    remove(id) {
+    remove(id: string): UserEntities[] {
         const post = this.users.find(p => p.id === id)
         let index = this.users.indexOf(post)
         if (index > -1) {
@@ -45,7 +47,9 @@ export class UsersService {
         return this.users
     }
 
-    update(updateUserDto, id) {
-        console.log(updateUserDto);
+    update(updateUserDto: UpdateUsersDto, id: string) {
+        let updatedUser = this.users.find( u => u.id === id)
+        updatedUser = updateUserDto
+        return updatedUser
     }
 }

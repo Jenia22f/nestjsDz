@@ -1,6 +1,5 @@
 import {Injectable} from "@nestjs/common";
 import {CreatePostDto} from "../dto/create-post.dto";
-import {CreateCommentsDto} from "../dto/create-comments.dto";
 
 class CreatePostDt {
 }
@@ -46,13 +45,13 @@ export class PostsService {
         })
     }
 
-    addCommentToPost(postId, commentId) {
+    addCommentToPost(postId: string, commentId: string) {
         let updatedPost = this.posts.find(p => p.id === postId)
         updatedPost.comments.push(commentId)
         return this.posts
     }
 
-    remove(id) {
+    remove(id: string) {
        const post = this.posts.find(p => p.id === id)
        let index = this.posts.indexOf(post)
         if (index > -1) {
