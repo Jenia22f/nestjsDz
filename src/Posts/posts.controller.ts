@@ -40,7 +40,7 @@ export class PostsController {
 
     @Post('/comment/:id')
     addCommentPost(@Body() createCommentsDto: CreateCommentsDto,@Param('id') id: string) {
-        return [this.postsService.addCommentToPost(id),  this.commentsService.addComment(createCommentsDto)]
+        return [this.postsService.addCommentToPost(id, createCommentsDto.id),  this.commentsService.addComment(createCommentsDto)]
     }
 
 }

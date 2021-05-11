@@ -46,9 +46,9 @@ export class PostsService {
         })
     }
 
-    addCommentToPost(postId) {
+    addCommentToPost(postId, commentId) {
         let updatedPost = this.posts.find(p => p.id === postId)
-        updatedPost.comments.push(Date.now().toString())
+        updatedPost.comments.push(commentId)
         return this.posts
     }
 
